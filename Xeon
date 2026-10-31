@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XEON | Next-Gen Crypto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --text-muted: #888888;
+            --accent-color: #00ffcc;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* --- Ambient 3D Glow Effects --- */
+        .glow-1 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0,255,204,0.15) 0%, rgba(0,0,0,0) 70%);
+            top: -100px;
+            left: -100px;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        .glow-2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0,150,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            top: 40%;
+            right: -100px;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        
+        .logo span { color: var(--accent-color); }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        /* Fake 3D Chrome Shape (CSS only) */
+        .chrome-shape {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #222 0%, #555 50%, #111 100%);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            position: absolute;
+            top: 15%;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.5;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg); }
+            50% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: rotate(10deg); }
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        /* Search Bar Style Button */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 10px 10px 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            outline: none;
+            flex: 1;
+            font-size: 15px;
+        }
+
+        .search-bar button {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: var(--accent-color);
+        }
+
+        /* --- Grid Section (Glass Cards) --- */
+        .section {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            transition: 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.1), transparent 50%);
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 204, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .glass-card:hover::before { opacity: 1; }
+
+        .glass-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .glass-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .highlight { color: var(--accent-color); font-weight: 600; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 40px; }
+            .nav-links { display: none; }
+            .search-bar { flex-direction: column; border-radius: 20px; background: transparent; border: none; }
+            .search-bar input { display: none; }
+            .search-bar button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">XE<span>O</span>N</div>
+        <div class="nav-links">
+            <a href="#about">Overview</a>
+            <a href="#howitworks">Mechanics</a>
+            <a href="#tokenomics">Tokenomics</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="chrome-shape"></div>
+        <h1>The Future of <br><span>Honest Crypto.</span></h1>
+        <p>No fake promises. No hidden wallets. Just a transparent smart contract designed to reward real holders with real BNB.</p>
+        
+        <!-- Replaced Buy Button with a Search-style Status Button -->
+        <div class="search-bar">
+            <input type="text" placeholder="Status: Launching Soon..." readonly>
+            <button>Notify Me</button>
+        </div>
+    </header>
+
+    <!-- About / Mechanics -->
+    <section id="howitworks" class="section">
+        <h2 class="section-title">How it works</h2>
+        <div class="grid">
+            <div class="glass-card">
+                <h3>01. Auto BNB Tax</h3>
+                <p>Every transaction incurs a small tax. The smart contract automatically converts this tax into real BNB and stores it in a reward pool.</p>
+            </div>
+            <div class="glass-card">
+                <h3>02. 7-Day Loyalty</h3>
+                <p>To claim your share, you must stake your XEON tokens for a minimum of 7 days. This ensures only real supporters get rewarded.</p>
+            </div>
+            <div class="glass-card">
+                <h3>03. Anti-Whale System</h3>
+                <p>Large trades (over 0.5% of supply) are taxed at <span class="highlight">5%</span> instead of 3%. This protects small holders from market manipulation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics -->
+    <section id="tokenomics" class="section">
+        <h2 class="section-title">Tokenomics</h2>
+        <div class="grid">
+            <div class="glass-card">
+                <h3>Total Supply</h3>
+                <p><span class="highlight">100,000,000 XEON</span> — Fixed forever. No minting.</p>
+            </div>
+            <div class="glass-card">
+                <h3>Reward Split</h3>
+                <p><span class="highlight">40%</span> Top 3 Stakers<br><span class="highlight">40%</span> All Holders<br><span class="highlight">20%</span> Project Development</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo" style="margin-bottom: 10px;">XE<span>O</span>N</div>
+        <p>100% Transparent. 100% Community Driven.</p>
+        <p style="margin-top: 10px;">&copy; 2024 XEON. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
